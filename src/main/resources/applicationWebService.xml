@@ -6,9 +6,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
-      http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+      http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd" default-autowire="byName">
+
+    <import resource="classpath*:META-INF/cxf/cxf.xml" />
+    <import resource="classpath*:META-INF/cxf/cxf-extension-jaxws.xml" />
+    <import resource="classpath*:META-INF/cxf/cxf-servlet.xml" />
     <!-- 这里的地址很重要，客户端需要通过这个地址来访问WebService -->
-    <jaxrs:server id="webService" address="/">
+    <jaxrs:server id="restServiceContainer" address="/">
         <!--输入拦截器设置-->
         <jaxrs:inInterceptors>
 
@@ -21,13 +25,13 @@
 
         <!--serviceBeans：暴露的WebService服务类-->
         <jaxrs:serviceBeans>
-            <ref bean="studentService"/>
+            <ref bean="weatherService"/>
         </jaxrs:serviceBeans>
 
         <!--支持的协议-->
         <jaxrs:extensionMappings>
-            <entry key="json" value="application/json"/>
-            <entry key="xml" value="application/xml"/>
+            <entry key="json" value="applicationContext/json"/>
+            <entry key="xml" value="applicationContext/xml"/>
         </jaxrs:extensionMappings>
         <!--编码格式-->
         <jaxrs:languageMappings>
@@ -35,8 +39,14 @@
         </jaxrs:languageMappings>
         <!--对象转换-->
         <jaxrs:providers>
-            <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+            <ref bean="jacksonProvider" />
         </jaxrs:providers>
 
     </jaxrs:server>
+    <bean id="jacksonObjectMapper"
+          class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"></bean>
+    <bean id="jacksonProvider"
+          class="com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider">
+        <property name="mapper" ref="jacksonObjectMapper" />
+    </bean>
 </beans>

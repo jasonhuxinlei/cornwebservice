@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.hxl.mapper.WeatherMapper">
+    <!--查询全部的用户信息  -->
+    <select id="findAll" resultMap="pojoRM">
+        SELECT * FROM mmd
+
+    </select>
+    <!--Pojo对象的结果集封装  -->
+    <resultMap type="Pojo" id="pojoRM" autoMapping="true">
+        <id column="StationID" property="stationID"/>
+        <id column="ObserveDate" property="observeDate"/>
+        <id column="AverTemperature" property="averTemperature"/>
+        <id column="HighestTemperature" property="highestTemperature"/>
+        <id column="LowestTempreature" property="lowestTempreature"/>
+        <id column="Rainfall" property="rainfall"/>
+        <id column="SunshineDuration" property="sunshineDuration"/>
+        <id column="AtmoPressure" property="atmoPressure"/>
+        <id column="AverWindSpeed" property="averWindSpeed"/>
+        <id column="RelativeHumidity" property="relativeHumidity"/>
+        <id column="MinRelaHumidity" property="minRelaHumidity"/>
+        <id column="GroundTemperature" property="groundTemperature"/>
+        <id column="MaxWindDirection" property="maxWindDirection"/>
+        <id column="MaxWindSpeed" property="maxWindSpeed"/>
+        <id column="HighestWindDirection" property="highestWindDirection"/>
+        <id column="HighestWindSpeed" property="highestWindSpeed"/>
+        <id column="AverWaterVaporPressure" property="averWaterVaporPressure"/>
+        <id column="HighestPressure" property="highestPressure"/>
+        <id column="LowestPressure" property="lowestPressure"/>
+        <id column="AverPressure" property="averPressure"/>
+        <id column="TtoERainfall" property="ttoERainfall"/>
+        <id column="EtoTRainfall" property="etoTRainfall"/>
+        <id column="LargeEvaporation" property="largeEvaporation"/>
+        <id column="SmallEvaporation" property="smallEvaporation"/>
+        <id column="AverGroundTemperature" property="averGroundTemperature"/>
+        <id column="HighestGroundTemperature" property="highestGroundTemperature"/>
+
+        <id column="LowestGroundTemperature" property="lowestGroundTemperature"/>
+
+
+
+
+
+
+    </resultMap>
+
+	
+	
+	
+	
+	
+	
+</mapper>
